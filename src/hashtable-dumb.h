@@ -1,6 +1,10 @@
 #ifndef HASHTABLE_DUMB_H_
 #define HASHTABLE_DUMB_H_
 
+/*
+ * This implementation does not handle collisions.
+ */
+
 #include <stdbool.h>
 #include <stddef.h>
 

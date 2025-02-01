@@ -6,7 +6,7 @@
 
 node_t *hash_table[TABLE_SIZE];
 
-static uint32_t hash(char *name);
+static uint64_t hash(const char *key);
 
 void hashtable_init(void)
 {
@@ -49,7 +49,6 @@ void hashtable_print(void)
     printf("+---------------------------------------+\n");
 }
 
-// Uses external chaining with linked lists when collisions are encountered
 bool hashtable_insert(char *name)
 {
     if (name == NULL) {
@@ -113,14 +112,16 @@ char *hashtable_delete(char *name)
     return ret;
 }
 
-static uint32_t hash(char *name)
-{
-    int32_t len = strnlen(name, MAX_STRING);
-    uint32_t hash_val = 0;
-    for (size_t i = 0; i < len; ++i) {
-        hash_val += name[i];
-        hash_val *= name[i];
-    }
+#define FNV_OFFSET 14695981039346656037UL
+#define FNV_PRIME 1099511628211UL
 
-    return hash_val % TABLE_SIZE;
+// Uses the Fowler–Noll–Vo hash function that returns a 64bit FNV-1a hash for key.
+static uint64_t hash(const char *key)
+{
+    uint64_t hash = FNV_OFFSET;
+    for (const char *p = key; *p; p++) {
+        hash ^= (uint64_t)(unsigned char)(*p);
+        hash *= FNV_PRIME;
+    }
+    return hash % TABLE_SIZE;
 }

@@ -38,7 +38,6 @@ void hashtable_print(void)
     printf("+---------------------------------------+\n");
 }
 
-// Does not handle collisions
 bool hashtable_insert(char *name)
 {
     if (name == NULL) {

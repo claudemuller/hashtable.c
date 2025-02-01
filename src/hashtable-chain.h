@@ -1,6 +1,10 @@
 #ifndef HASHTABLE_CHAIN_H_
 #define HASHTABLE_CHAIN_H_
 
+/*
+ * This implementation uses external chaining with linked lists in order to handle collisions.
+ */
+
 #include <stdbool.h>
 #include <stddef.h>
 

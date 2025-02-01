@@ -1,6 +1,10 @@
 #ifndef HASHTABLE_LINEAR_H_
 #define HASHTABLE_LINEAR_H_
 
+/*
+ * This implementation uses open addressing with linear probing in order to handle collisions.
+ */
+
 #include <stdbool.h>
 #include <stddef.h>
 
